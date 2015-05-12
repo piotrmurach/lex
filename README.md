@@ -83,7 +83,7 @@ The **Lex** rules specified in the lexer will determine how the chunking of the 
 Given an input:
 
 ```ruby
-x = 5 + 44 * (s - t)
+input = "x = 5 + 44 * (s - t)"
 ```
 
 and a simple tokenizer:
@@ -99,7 +99,7 @@ class MyLexer < Lex::Lexer
     :LPAREN,
     :RPAREN,
     :EQUALS,
-    :IDENTIFIER
+    :ID
   )
 
   # Regular expression rules for simple tokens
@@ -109,7 +109,7 @@ class MyLexer < Lex::Lexer
   rule(:DIVIDE, /\//)
   rule(:LPAREN, /\(/)
   rule(:RPAREN, /\)/)
-  rule(:IDENTIFIER, /\A[_\$a-zA-Z][_\$0-9a-zA-Z]*/)
+  rule(:ID,     /\A[_\$a-zA-Z][_\$0-9a-zA-Z]*/)
 
   # A regular expression rules with actions
   rule(:NUMBER, /[0-9]+/) do |lexer, token|
@@ -137,11 +137,10 @@ my_lexer = MyLexer.new
 To use the lexer you need to provide it some input using the `lex` method. After that, the method `lex` will either yield tokens to a given block or return an enumereator to allow you to retrieve tokens by repeatedly calling `next` method.
 
 ```ruby
-input = "x = 5 + 44 * (s - t)"
 output = my_lexer.lex(input)
-output.next  # =>  Lex::Token(:ID,'x', 1, 1)
-output.next  # =>  Lex::Token[:EQUALS, '=', 1, 3]
-output.next  # =>  Lex::Token[:NUMBER, '5', 1, 5]
+output.next  # =>  Lex::Token(ID,x,1,1)
+output.next  # =>  Lex::Token(EQUALS,=,1,3)
+output.next  # =>  Lex::Token(NUMBER,5,1,5)
 ...
 ```
 
@@ -201,10 +200,10 @@ def self.keywords
   }
 end
 
-tokens(:IDENTIFIER, *keywords.values)
+tokens(:ID, *keywords.values)
 
-rule(:IDENTIFIER, /\w[\w\d]*/) do |lexer, token|
-  token.name = lexer.class.keywords.fetch(token.value.to_sym, :IDENTIFIER
+rule(:ID, /\w[\w\d]*/) do |lexer, token|
+  token.name = lexer.class.keywords.fetch(token.value.to_sym, :ID)
   token
 end
 ```
@@ -214,7 +213,7 @@ end
 By default token value is the text that was matched by the rule. However, the token value can be changed to any object. For example, when processing identifiers you may wish to return both identifier name and actual value.
 
 ```ruby
-rule(:IDENTIFIER, /\w[\w\d]*/) do |lexer, token|
+rule(:ID, /\w[\w\d]*/) do |lexer, token|
   token.value = [token.value, lexer.class.keywords[token.value]]
   token
 end
@@ -226,7 +225,7 @@ To discard a token, such as comment, define a rule that returns no token. For in
 
 ```ruby
 rule(:COMMENT, /\#.*/) do |lexer, token|
-  
+  # No return value. Token is discarded.
 end
 ```
 
@@ -377,7 +376,10 @@ Assume you are parsing HTML and you want to ignore anything inside comment. Here
 
 ```ruby
 class MyLexer < Lex::Lexer
-  tokens( )
+  tokens(
+    :TAG,
+    :ATTRIBUTE
+  )
 
   # Declare the states
   states( htmlcomment: :exclusive )
