@@ -202,7 +202,7 @@ end
 
 tokens(:ID, *keywords.values)
 
-rule(:ID, /\w[\w\d]*/) do |lexer, token|
+rule(:ID, /[_[:alpha:]][_[:alnum:]]*/) do |lexer, token|
   token.name = lexer.class.keywords.fetch(token.value.to_sym, :ID)
   token
 end
@@ -213,7 +213,7 @@ end
 By default token value is the text that was matched by the rule. However, the token value can be changed to any object. For example, when processing identifiers you may wish to return both identifier name and actual value.
 
 ```ruby
-rule(:ID, /\w[\w\d]*/) do |lexer, token|
+rule(:ID, /[_[:alpha:]][_[:alnum:]]*/) do |lexer, token|
   token.value = [token.value, lexer.class.keywords[token.value]]
   token
 end

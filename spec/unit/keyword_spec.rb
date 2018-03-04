@@ -16,7 +16,7 @@ RSpec.describe Lex::Lexer, 'keywords' do
 
       tokens(:IDENTIFIER, *keywords.values)
 
-      rule(:IDENTIFIER, /\w[\w\d]*/) do |lexer, token|
+      rule(:IDENTIFIER, /[_[:alpha:]][_[:alnum:]]*/) do |lexer, token|
         token.name = lexer.class.keywords.fetch(token.value.to_sym, :IDENTIFIER)
         token
       end
