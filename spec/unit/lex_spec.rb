@@ -29,7 +29,7 @@ RSpec.describe Lex::Lexer, 'lex' do
       rule(:LPAREN, /\(/)
       rule(:RPAREN, /\)/)
       rule(:EQUALS, /=/)
-      rule(:IDENTIFIER, /\A[_\$a-zA-Z][_\$0-9a-zA-Z]*/)
+      rule(:IDENTIFIER, /[_\$a-zA-Z][_\$0-9a-zA-Z]*/)
 
       rule(:NUMBER, /[0-9]+/) do |lexer, token|
         token.value = token.value.to_i

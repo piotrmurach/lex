@@ -109,7 +109,7 @@ class MyLexer < Lex::Lexer
   rule(:DIVIDE, /\//)
   rule(:LPAREN, /\(/)
   rule(:RPAREN, /\)/)
-  rule(:ID,     /\A[_\$a-zA-Z][_\$0-9a-zA-Z]*/)
+  rule(:ID,     /[_\$a-zA-Z][_\$0-9a-zA-Z]*/)
 
   # A regular expression rules with actions
   rule(:NUMBER, /[0-9]+/) do |lexer, token|
