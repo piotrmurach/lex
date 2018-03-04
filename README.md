@@ -245,10 +245,10 @@ Calling the `advance_line` method the `current_line` is updated for the underlyi
 
 ### 1.8 Ignored characters
 
-For any character that should be completely ignored in the input stream use the `ignore` rule. Usually this is used to skip over whitespace and other non-essential characters. For example:
+For any character that should be completely ignored in the input stream use the `ignore` method. Usually this is used to skip over whitespace and other non-essential characters. For example:
 
 ```ruby
-ignore = " \t" # => Ignore whitespace and tabs
+ignore " \t" # => Ignore whitespace and tabs
 ```
 
 You could create a rule to achieve similar behaviour, however you are encourage to use this method as it has increased performance over the rule regular expression matching.
