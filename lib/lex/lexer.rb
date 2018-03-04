@@ -96,11 +96,12 @@ module Lex
         end
 
         if longest_token
+          longest_token_value_length = longest_token.value.length
           if longest_token.action
             new_token = longest_token.action.call(self, longest_token)
             # No value returned from action move to the next token
             if new_token.nil? || !new_token.is_a?(Token)
-              chars_to_skip = longest_token.value.to_s.length
+              chars_to_skip = longest_token_value_length
               scanner.pos += chars_to_skip
               unless longest_token.name == :newline
                 @char_pos_in_line += chars_to_skip
@@ -108,7 +109,7 @@ module Lex
               next
             end
           end
-          move_by = longest_token.value.to_s.length
+          move_by = longest_token_value_length
           start_char_pos_in_token = @char_pos_in_line + current_char.size
           longest_token.update_line(current_line, start_char_pos_in_token)
           advance_column(move_by)
