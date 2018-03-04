@@ -26,11 +26,8 @@ module Lex
                    :state_lexemes
 
     def initialize(options = {}, &block)
-      @current_line     = 1
-      @current_pos      = 1 # Position in input
-      @char_pos_in_line = 0
-      @current_state    = :initial
-      @state_stack      = []
+      rewind
+
       @logger           = Lex::Logger.new
       @linter           = Lex::Linter.new
       @debug            = options[:debug]
@@ -196,9 +193,11 @@ module Lex
     # Reset the internal state of the lexer
     # @api public
     def rewind
-      @line = 1
-      @column = 1
-      @stack = []
+      @current_line     = 1
+      @current_pos      = 1 # Position in input
+      @char_pos_in_line = 0
+      @current_state    = :initial
+      @state_stack      = []
     end
 
     private

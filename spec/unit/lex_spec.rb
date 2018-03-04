@@ -58,7 +58,7 @@ RSpec.describe Lex::Lexer, 'lex' do
     ])
 
     # Test that lexer is correctly parsing if created token value isn't equal to original text
-    my_lexer = MyLexer.new
+    my_lexer.rewind
     code_with_prefix = unindent(<<-EOS)
       x = 05 + 0044 * (s - t)
     EOS
