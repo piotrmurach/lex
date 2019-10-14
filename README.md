@@ -109,7 +109,7 @@ class MyLexer < Lex::Lexer
   rule(:DIVIDE, /\//)
   rule(:LPAREN, /\(/)
   rule(:RPAREN, /\)/)
-  rule(:ID,     /\A[_\$a-zA-Z][_\$0-9a-zA-Z]*/)
+  rule(:ID,     /[_\$a-zA-Z][_\$0-9a-zA-Z]*/)
 
   # A regular expression rules with actions
   rule(:NUMBER, /[0-9]+/) do |lexer, token|
@@ -202,7 +202,7 @@ end
 
 tokens(:ID, *keywords.values)
 
-rule(:ID, /\w[\w\d]*/) do |lexer, token|
+rule(:ID, /[_[:alpha:]][_[:alnum:]]*/) do |lexer, token|
   token.name = lexer.class.keywords.fetch(token.value.to_sym, :ID)
   token
 end
@@ -213,7 +213,7 @@ end
 By default token value is the text that was matched by the rule. However, the token value can be changed to any object. For example, when processing identifiers you may wish to return both identifier name and actual value.
 
 ```ruby
-rule(:ID, /\w[\w\d]*/) do |lexer, token|
+rule(:ID, /[_[:alpha:]][_[:alnum:]]*/) do |lexer, token|
   token.value = [token.value, lexer.class.keywords[token.value]]
   token
 end
@@ -245,10 +245,10 @@ Calling the `advance_line` method the `current_line` is updated for the underlyi
 
 ### 1.8 Ignored characters
 
-For any character that should be completely ignored in the input stream use the `ignore` rule. Usually this is used to skip over whitespace and other non-essential characters. For example:
+For any character that should be completely ignored in the input stream use the `ignore` method. Usually this is used to skip over whitespace and other non-essential characters. For example:
 
 ```ruby
-ignore = " \t" # => Ignore whitespace and tabs
+ignore " \t" # => Ignore whitespace and tabs
 ```
 
 You could create a rule to achieve similar behaviour, however you are encourage to use this method as it has increased performance over the rule regular expression matching.
