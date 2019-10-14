@@ -12,7 +12,7 @@
 [coveralls]: https://coveralls.io/r/piotrmurach/lex
 [inchpages]: http://inch-ci.org/github/piotrmurach/lex
 
-> Lex is an implementation of complier construction tool lex in Ruby. The goal is to stay close to the way the original tool works and combine it with the expressivness of Ruby.
+> Lex is an implementation of complier construction tool lex in Ruby. The goal is to stay close to the way the original tool works and combine it with the expressiveness of Ruby.
 
 ## Features
 * Very focused tool that mimics the basic lex functionality.
@@ -166,13 +166,18 @@ tokens(
 
 ### 1.3 Specifying rules
 
-Each token is specified by writting a regular expression rule defined by by calling the `rule` method. For simple tokens you can just specify the name and regular expression:
+There are two important things to know about this scanner:
+
+1) Longest match wins.
+2) If two matches have the same length, the first in source code wins.
+
+Each token is specified by writing a regular expression rule defined by by calling the `rule` method. For simple tokens you can just specify the name and regular expression:
 
 ```ruby
 rule(:PLUS, /\+/)
 ```
 
-In this case, the first argument is the name of the token that needs to match exactly one of the names supplied in `tokens`. If you need to perform further processing on the matched token, the rule can be further expaned by adding an action inside a block. For instance, this rule matches numbers and converts the matched string into integer type:
+In this case, the first argument is the name of the token that needs to match exactly one of the names supplied in `tokens`. If you need to perform further processing on the matched token, the rule can be further expanded by adding an action inside a block. For instance, this rule matches numbers and converts the matched string into integer type:
 
 ```ruby
 token(:NUMBER, /\d+/) do |lexer, token|
