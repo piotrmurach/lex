@@ -2,12 +2,12 @@ source 'https://rubygems.org'
 
 gemspec
 
-group :metrics do
-  gem 'coveralls', '~> 0.8.2'
-  gem 'simplecov', '~> 0.10.0'
-  gem 'yardstick', '~> 0.9.9'
+group :test do
+  gem 'benchmark-ips', '~> 2.7.2'
+  gem 'coveralls', '~> 0.8.22'
+  gem 'simplecov', '~> 0.16.1'
 end
 
-group :benchmarks do
-  gem 'benchmark_suite', '~> 1.0.0'
+group :metrics do
+  gem 'yardstick', '~> 0.9.9'
 end
