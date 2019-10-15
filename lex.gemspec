@@ -1,13 +1,12 @@
-# coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'lex/version'
+require "lex/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "lex"
   spec.version       = Lex::VERSION
   spec.authors       = ["Piotr Murach"]
-  spec.email         = [""]
+  spec.email         = ["me@piotrmurach.com"]
   spec.summary       = %q{Lex is an implementation of complier constuction tool lex in Ruby.}
   spec.description   = %q{Lex is an implementation of compiler construction tool lex in Ruby. The goal is to stay close to the way the original tool works and combine it with the expressivness or Ruby.}
   spec.homepage      = ""
@@ -18,5 +17,9 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 1.6"
+  spec.required_ruby_version = ">= 2.0.0"
+
+  spec.add_development_dependency "bundler", ">= 1.5"
+  spec.add_development_dependency "rake"
+  spec.add_development_dependency "rspec", "~> 3.0"
 end
