@@ -1,12 +1,15 @@
 # Lex
+
 [![Gem Version](https://badge.fury.io/rb/lex.svg)][gem]
 [![Build Status](https://secure.travis-ci.org/piotrmurach/lex.svg?branch=master)][travis]
+[![Build status](https://ci.appveyor.com/api/projects/status/h1bkt03qngsq851l?svg=true)][appveyor]
 [![Code Climate](https://codeclimate.com/github/piotrmurach/lex/badges/gpa.svg)][codeclimate]
 [![Coverage Status](https://coveralls.io/repos/piotrmurach/lex/badge.svg)][coveralls]
 [![Inline docs](http://inch-ci.org/github/piotrmurach/lex.svg?branch=master)][inchpages]
 
 [gem]: http://badge.fury.io/rb/lex
 [travis]: http://travis-ci.org/piotrmurach/lex
+[appveyor]: https://ci.appveyor.com/project/piotrmurach/lex
 [codeclimate]: https://codeclimate.com/github/piotrmurach/lex
 [gemnasium]: https://gemnasium.com/piotrmurach/lex
 [coveralls]: https://coveralls.io/r/piotrmurach/lex
