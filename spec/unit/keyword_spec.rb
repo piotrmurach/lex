@@ -1,6 +1,4 @@
-# coding: utf-8
-
-require 'spec_helper'
+# frozen_string_literal: true
 
 RSpec.describe Lex::Lexer, 'keywords' do
   it "allows to easily create keyword tokens" do

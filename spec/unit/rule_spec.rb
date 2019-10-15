@@ -1,9 +1,6 @@
-# coding: utf-8
-
-require 'spec_helper'
+# frozen_string_literal: true
 
 RSpec.describe Lex::Lexer, '#rule' do
-
   it "raises error with no rules" do
     expect {
       stub_const('MyLexer', Class.new(Lex::Lexer) do

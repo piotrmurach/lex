@@ -1,6 +1,4 @@
-# coding: utf-8
-
-require 'spec_helper'
+# frozen_string_literal: true
 
 RSpec.describe Lex::Lexer, 'position' do
   it "calculates line number and position info from input" do
