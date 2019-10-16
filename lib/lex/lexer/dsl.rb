@@ -1,6 +1,6 @@
-# coding: utf-8
+# frozen_string_literal: true
 
-require 'lex/lexer/rule_dsl'
+require_relative "rule_dsl"
 
 module Lex
   class Lexer

@@ -1,4 +1,4 @@
-# coding: utf-8
+# frozen_string_literal: true
 
 module Lex
   # A class responsible for checking lexer definitions

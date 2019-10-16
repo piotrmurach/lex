@@ -1,6 +1,8 @@
-# coding: utf-8
+# frozen_string_literal: true
 
-require 'forwardable'
+require "forwardable"
+
+require_relative "source_line"
 
 module Lex
   # Used to represent the tokens produced

@@ -1,6 +1,11 @@
-# coding: utf-8
+# frozen_string_literal: true
 
-require 'lex/lexer/dsl'
+require "forwardable"
+require "strscan"
+
+require_relative "lexer/dsl"
+require_relative "linter"
+require_relative "logger"
 
 module Lex
   # An abstract lexer that doesn't provide any lexing rules.

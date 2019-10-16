@@ -1,17 +1,7 @@
-# coding: utf-8
+# frozen_string_literal: true
 
-require 'strscan'
-require 'logger'
-require 'forwardable'
-
-require 'lex/logger'
-require 'lex/linter'
-require 'lex/lexeme'
-require 'lex/source_line'
-require 'lex/state'
-require 'lex/token'
-require 'lex/lexer'
-require "lex/version"
+require_relative "lex/lexer"
+require_relative "lex/version"
 
 module Lex
   # A base class for all Lexer errors

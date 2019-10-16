@@ -1,4 +1,8 @@
-# coding: utf-8
+# frozen_string_literal: true
+
+require_relative "../lexeme"
+require_relative "../logger"
+require_relative "../state"
 
 module Lex
   class Lexer
@@ -12,7 +16,8 @@ module Lex
                   :state_names,
                   :state_ignore,
                   :state_error,
-                  :state_lexemes
+                  :state_lexemes,
+                  :logger
 
       # @api private
       def initialize
@@ -23,6 +28,7 @@ module Lex
         @state_names   = {} # Symbol names for each state
         @state_lexemes = Hash.new { |hash, name| hash[name] = State.new(name) }
         @lex_tokens    = []  # List of valid tokens
+        @logger        = Lex::Logger.new
       end
 
       # Add tokens to lexer
