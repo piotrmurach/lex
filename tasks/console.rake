@@ -1,4 +1,4 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 desc 'Load gem inside irb console'
 task :console do
@@ -8,3 +8,4 @@ task :console do
   ARGV.clear
   IRB.start
 end
+task c: %w[ console ]
