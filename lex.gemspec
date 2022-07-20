@@ -21,6 +21,7 @@ expressiveness of Ruby.
   spec.metadata["changelog_uri"] = "https://github.com/piotrmurach/lex/blob/master/CHANGELOG.md"
   spec.metadata["documentation_uri"] = "https://www.rubydoc.info/gems/lex"
   spec.metadata["homepage_uri"] = spec.homepage
+  spec.metadata["rubygems_mfa_required"] = "true"
   spec.metadata["source_code_uri"] = "https://github.com/piotrmurach/lex"
 
   spec.files         = Dir['{lib,spec,examples}/**/*.rb']
