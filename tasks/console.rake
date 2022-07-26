@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-desc 'Load gem inside irb console'
+desc "Load gem inside irb console"
 task :console do
-  require 'irb'
-  require 'irb/completion'
-  require File.join(__FILE__, '../../lib/lex')
+  require "irb"
+  require "irb/completion"
+  require File.join(__FILE__, "../../lib/lex")
   ARGV.clear
   IRB.start
 end
-task c: %w[ console ]
+task c: :console
