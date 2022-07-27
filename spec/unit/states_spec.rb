@@ -1,26 +1,26 @@
 # frozen_string_literal: true
 
-RSpec.describe Lex::Lexer, '#states' do
-
+RSpec.describe Lex::Lexer, "#states" do
   it "checks states" do
     expect {
-      stub_const('MyLexer', Class.new(Lex::Lexer) do
+      stub_const("MyLexer", Class.new(described_class) do
         tokens(:IDENTIFIER)
 
         states(foo: :unknown)
       end)
       MyLexer.new
-    }.to raise_error(Lex::Linter::Failure, /State type for state foo must be/)
+    }.to raise_error(Lex::Linter::Failure,
+                     /State type for state foo must be/)
   end
 
   it "lexes ignoring :exclusive state tokens" do
-    stub_const('MyLexer', Class.new(Lex::Lexer) do
+    stub_const("MyLexer", Class.new(described_class) do
       tokens(
         :IDENTIFIER,
         :LBRACE,
         :RBRACE
       )
-      states( brace: :exclusive )
+      states(brace: :exclusive)
 
       rule(:IDENTIFIER, /a|b/)
 
@@ -41,18 +41,18 @@ RSpec.describe Lex::Lexer, '#states' do
     end)
     my_lexer = MyLexer.new
     expect(my_lexer.lex("a{bb}a").map(&:to_ary)).to eq([
-      [:IDENTIFIER, 'a', 1, 1],
-      [:LBRACE, '{', 1, 2],
-      [:RBRACE, '}', 1, 5],
-      [:IDENTIFIER, 'a', 1, 6]
+      [:IDENTIFIER, "a", 1, 1],
+      [:LBRACE, "{", 1, 2],
+      [:RBRACE, "}", 1, 5],
+      [:IDENTIFIER, "a", 1, 6]
     ])
   end
 
   it "lexes in :exclusive state" do
-    stub_const('MyLexer', Class.new(Lex::Lexer) do
-      tokens( :WORD )
+    stub_const("MyLexer", Class.new(described_class) do
+      tokens(:WORD)
 
-      states( htmlcomment: :exclusive )
+      states(htmlcomment: :exclusive)
 
       rule(:WORD, /\w+/)
 
@@ -73,16 +73,16 @@ RSpec.describe Lex::Lexer, '#states' do
     end)
     my_lexer = MyLexer.new
     expect(my_lexer.lex("hello <!-- comment --> world").map(&:to_ary)).to eq([
-      [:WORD, 'hello', 1, 1],
-      [:WORD, 'world', 1, 24]
+      [:WORD, "hello", 1, 1],
+      [:WORD, "world", 1, 24]
     ])
   end
 
   it "warns about lack of error condition in :exclusive state" do
-    stub_const('MyLexer', Class.new(Lex::Lexer) do
-      tokens( :WORD )
+    stub_const("MyLexer", Class.new(described_class) do
+      tokens(:WORD)
 
-      states( htmlcomment: :exclusive )
+      states(htmlcomment: :exclusive)
 
       rule(:WORD, /\w+/)
 
@@ -92,15 +92,15 @@ RSpec.describe Lex::Lexer, '#states' do
     end)
     expect {
       MyLexer.new
-    }.to output(/No error rule is defined for exclusive state 'htmlcomment'/).
-      to_stderr_from_any_process
+    }.to output(/No error rule is defined for exclusive state 'htmlcomment'/)
+     .to_stderr_from_any_process
   end
 
   it "warns about lack of ignore condition in :inclusive state" do
-    stub_const('MyLexer', Class.new(Lex::Lexer) do
-      tokens( :WORD )
+    stub_const("MyLexer", Class.new(described_class) do
+      tokens(:WORD)
 
-      states( htmlcomment: :exclusive )
+      states(htmlcomment: :exclusive)
 
       rule(:WORD, /\w+/)
 
@@ -110,15 +110,15 @@ RSpec.describe Lex::Lexer, '#states' do
     end)
     expect {
       MyLexer.new
-    }.to output(/No ignore rule is defined for exclusive state 'htmlcomment'/).
-      to_stderr_from_any_process
+    }.to output(/No ignore rule is defined for exclusive state 'htmlcomment'/)
+     .to_stderr_from_any_process
   end
 
   it "lexes in :inclusive state" do
-    stub_const('MyLexer', Class.new(Lex::Lexer) do
-      tokens( :WORD )
+    stub_const("MyLexer", Class.new(described_class) do
+      tokens(:WORD)
 
-      states( htmlcomment: :inclusive )
+      states(htmlcomment: :inclusive)
 
       rule(:WORD, /\w+/)
 
@@ -139,17 +139,17 @@ RSpec.describe Lex::Lexer, '#states' do
     end)
     my_lexer = MyLexer.new
     expect(my_lexer.lex("hello <!-- comment --> world").map(&:to_ary)).to eq([
-      [:WORD, 'hello', 1, 1],
-      [:WORD, 'comment', 1, 12],
-      [:WORD, 'world', 1, 24]
+      [:WORD, "hello", 1, 1],
+      [:WORD, "comment", 1, 12],
+      [:WORD, "world", 1, 24]
     ])
   end
 
   it "includes error condition in :inclusive state" do
-    stub_const('MyLexer', Class.new(Lex::Lexer) do
-      tokens( :WORD )
+    stub_const("MyLexer", Class.new(described_class) do
+      tokens(:WORD)
 
-      states( htmlcomment: :inclusive )
+      states(htmlcomment: :inclusive)
 
       rule(:WORD, /\w+/)
 
@@ -161,32 +161,35 @@ RSpec.describe Lex::Lexer, '#states' do
         lexer.pop_state
       end
 
-      error do |lexer, token| end
+      error do |lexer, token|
+      end
 
       ignore " \t"
     end)
     my_lexer = MyLexer.new
     expect(my_lexer.lex("hello <!-- comment --> world").map(&:to_ary)).to eq([
-      [:WORD, 'hello', 1, 1],
-      [:WORD, 'comment', 1, 12],
-      [:WORD, 'world', 1, 24]
+      [:WORD, "hello", 1, 1],
+      [:WORD, "comment", 1, 12],
+      [:WORD, "world", 1, 24]
     ])
   end
 
   it "complains if there are no rules for state" do
-    stub_const('MyLexer', Class.new(Lex::Lexer) do
-      tokens( :WORD )
+    stub_const("MyLexer", Class.new(described_class) do
+      tokens(:WORD)
 
-      states( htmlcomment: :inclusive )
+      states(htmlcomment: :inclusive)
 
       rule(:WORD, /\w+/)
 
-      error do |lexer, token| end
+      error do |lexer, token|
+      end
 
       ignore " \t"
     end)
     expect {
       MyLexer.new
-    }.to raise_error(Lex::Linter::Failure, /No rules defined for state 'htmlcomment'/)
+    }.to raise_error(Lex::Linter::Failure,
+                     /No rules defined for state 'htmlcomment'/)
   end
 end

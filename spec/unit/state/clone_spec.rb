@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-RSpec.describe Lex::State, '.clone' do
+RSpec.describe Lex::State, "#clone" do
   it "clones state instance" do
-    lexeme = double(:lexeme)
+    lexeme = instance_double("Lexeme")
     lexemes = [lexeme, lexeme]
-    state = Lex::State.new(:initial, lexemes)
+    state = described_class.new(:initial, lexemes)
     new_state = state.clone
 
-    expect(new_state).to_not eql(state)
-    expect(new_state.lexemes).to_not eql(state.lexemes)
+    expect(new_state).not_to eql(state)
+    expect(new_state.lexemes).not_to eql(state.lexemes)
   end
 end

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.describe Lex::Lexer, 'keywords' do
+RSpec.describe Lex::Lexer, ".keywords" do
   it "allows to easily create keyword tokens" do
-    stub_const('MyLexer', Class.new(Lex::Lexer) do
+    stub_const("MyLexer", Class.new(described_class) do
       def self.keywords
         {
           if: :IF,
@@ -19,14 +19,14 @@ RSpec.describe Lex::Lexer, 'keywords' do
         token
       end
 
-      ignore(' ')
+      ignore(" ")
     end)
     my_lexer = MyLexer.new
 
     expect(my_lexer.lex("if then else").map(&:to_ary)).to eq([
-      [:IF, 'if', 1, 1],
-      [:THEN, 'then', 1, 4],
-      [:ELSE, 'else', 1, 9]
+      [:IF, "if", 1, 1],
+      [:THEN, "then", 1, 4],
+      [:ELSE, "else", 1, 9]
     ])
   end
 end

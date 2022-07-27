@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-if ENV['COVERAGE'] == 'true'
-  require 'simplecov'
-  require 'coveralls'
+if ENV["COVERAGE"] == "true"
+  require "simplecov"
+  require "coveralls"
 
   SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
     SimpleCov::Formatter::HTMLFormatter,
@@ -10,12 +10,12 @@ if ENV['COVERAGE'] == 'true'
   ])
 
   SimpleCov.start do
-    command_name 'spec'
-    add_filter 'spec'
+    command_name "spec"
+    add_filter "spec"
   end
 end
 
-require 'lex'
+require "lex"
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -26,7 +26,8 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  # Limits the available syntax to the non-monkey patched syntax that is recommended.
+  # Limits the available syntax to the non-monkey patched syntax
+  # that is recommended.
   config.disable_monkey_patching!
 
   # This setting enables warnings. It's recommended, but in some cases may
@@ -34,7 +35,7 @@ RSpec.configure do |config|
   config.warnings = true
 
   if config.files_to_run.one?
-    config.default_formatter = 'doc'
+    config.default_formatter = "doc"
   end
 
   config.profile_examples = 2
@@ -46,5 +47,5 @@ end
 
 def unindent(string)
   prefix = string.scan(/^[ \t]+(?=\S)/).min
-  string.gsub(/^#{prefix}/, '').chomp
+  string.gsub(/^#{prefix}/, "").chomp
 end

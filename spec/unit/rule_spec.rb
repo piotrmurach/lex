@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-RSpec.describe Lex::Lexer, '#rule' do
+RSpec.describe Lex::Lexer, "#rule" do
   it "raises error with no rules" do
     expect {
-      stub_const('MyLexer', Class.new(Lex::Lexer) do
+      stub_const("MyLexer", Class.new(described_class) do
         tokens(:ID)
       end)
       MyLexer.new
@@ -11,7 +11,7 @@ RSpec.describe Lex::Lexer, '#rule' do
   end
 
   it "skips rule that has action but doesn't return token" do
-    stub_const('MyLexer', Class.new(Lex::Lexer) do
+    stub_const("MyLexer", Class.new(described_class) do
       tokens(
         :IDENTIFIER,
         :LBRACE,
@@ -29,17 +29,17 @@ RSpec.describe Lex::Lexer, '#rule' do
     end)
     my_lexer = MyLexer.new
     expect(my_lexer.lex("a{b}a").map(&:to_ary)).to eq([
-      [:IDENTIFIER, 'a', 1, 1],
-      [:IDENTIFIER, 'b', 1, 3],
-      [:RBRACE, '}', 1, 4],
-      [:IDENTIFIER, 'a', 1, 5]
+      [:IDENTIFIER, "a", 1, 1],
+      [:IDENTIFIER, "b", 1, 3],
+      [:RBRACE, "}", 1, 4],
+      [:IDENTIFIER, "a", 1, 5]
     ])
   end
 
   it "validates uniquness" do
     expect {
-      Class.new(Lex::Lexer) do
-        tokens( :WORD )
+      Class.new(described_class) do
+        tokens(:WORD)
 
         rule(:WORD, /\w+/)
 
@@ -50,11 +50,12 @@ RSpec.describe Lex::Lexer, '#rule' do
 
   it "throws error if using token in rule without prior specifying" do
     expect {
-      Class.new(Lex::Lexer) do
+      Class.new(described_class) do
         tokens(:ID)
 
         rule(:UNKNOWN, /a/)
       end
-    }.to raise_error(Lex::LexerError, /Rule 'UNKNOWN' defined for an unspecified token UNKNOWN/)
+    }.to raise_error(Lex::LexerError,
+                     /Rule 'UNKNOWN' defined for an unspecified token UNKNOWN/)
   end
 end
