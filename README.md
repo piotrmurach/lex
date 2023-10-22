@@ -1,14 +1,14 @@
 # Lex
 
 [![Gem Version](https://badge.fury.io/rb/lex.svg)][gem]
-[![Actions CI](https://github.com/piotrmurach/lex/workflows/CI/badge.svg?branch=master)][gh_actions_ci]
+[![Actions CI](https://github.com/piotrmurach/lex/actions/workflows/ci.yml/badge.svg)][gh_actions_ci]
 [![Build status](https://ci.appveyor.com/api/projects/status/h1bkt03qngsq851l?svg=true)][appveyor]
 [![Code Climate](https://codeclimate.com/github/piotrmurach/lex/badges/gpa.svg)][codeclimate]
 [![Coverage Status](https://coveralls.io/repos/piotrmurach/lex/badge.svg)][coveralls]
 [![Inline docs](http://inch-ci.org/github/piotrmurach/lex.svg?branch=master)][inchpages]
 
 [gem]: http://badge.fury.io/rb/lex
-[gh_actions_ci]: https://github.com/piotrmurach/lex/actions?query=workflow%3ACI
+[gh_actions_ci]: https://github.com/piotrmurach/lex/actions/workflows/ci.yml
 [appveyor]: https://ci.appveyor.com/project/piotrmurach/lex
 [codeclimate]: https://codeclimate.com/github/piotrmurach/lex
 [gemnasium]: https://gemnasium.com/piotrmurach/lex
