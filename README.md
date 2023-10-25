@@ -5,7 +5,6 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/h1bkt03qngsq851l?svg=true)][appveyor]
 [![Code Climate](https://codeclimate.com/github/piotrmurach/lex/badges/gpa.svg)][codeclimate]
 [![Coverage Status](https://coveralls.io/repos/piotrmurach/lex/badge.svg)][coveralls]
-[![Inline docs](http://inch-ci.org/github/piotrmurach/lex.svg?branch=master)][inchpages]
 
 [gem]: http://badge.fury.io/rb/lex
 [gh_actions_ci]: https://github.com/piotrmurach/lex/actions/workflows/ci.yml
@@ -13,7 +12,6 @@
 [codeclimate]: https://codeclimate.com/github/piotrmurach/lex
 [gemnasium]: https://gemnasium.com/piotrmurach/lex
 [coveralls]: https://coveralls.io/r/piotrmurach/lex
-[inchpages]: http://inch-ci.org/github/piotrmurach/lex
 
 > Lex is an implementation of complier construction tool lex in Ruby. The goal is to stay close to the way the original tool works and combine it with the expressiveness of Ruby.
 
